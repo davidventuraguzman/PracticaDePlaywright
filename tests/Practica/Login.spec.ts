@@ -21,5 +21,21 @@ test("test", async ({ page }) => {
 test("testOrange", async ({ page }) => {
   await page.goto("https://www.orangehrm.com/");
 
-  await page.pause();
+  await page.getByRole("button", { name: "Book a Free Demo" }).click();
+  await page.getByRole("textbox", { name: "Full Name" }).fill("David");
+  await page
+    .getByRole("textbox", { name: "Email" })
+    .fill("david.02.vg@gmail.com");
+  await page.getByRole("textbox", { name: "Contact" }).fill("123456789");
+
+  const arrayconutry = await page.getByRole("combobox", { name: "Country" });
+
+  const countries = await arrayconutry.allTextContents();
+
+  const randomCountry = countries[Math.floor(Math.random() * countries.length)];
+
+  const country = await page.getByRole("combobox", { name: "Country" });
+  await country.fill(randomCountry);
+
+  console.log(`País seleccionado: ${randomCountry}`);
 });
