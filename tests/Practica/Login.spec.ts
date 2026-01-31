@@ -59,5 +59,11 @@ test("testOrange", async ({ page }) => {
     randomIndexNumberOfEmployees,
   );
 
+  await page
+    .getByRole("textbox", { name: "Your Message" })
+    .fill("Se logro la prueba");
+
+  await page.getByRole("button", { name: "Contact Sales" }).click();
+
   await page.pause();
 });
